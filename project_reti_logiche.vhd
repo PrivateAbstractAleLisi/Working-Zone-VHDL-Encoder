@@ -179,13 +179,13 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
             when s_send_enc => --ho trovato un match in una delle wz, combino i campi compilati in precedenza per ottenere l'indirizzo codificato
                 
                  o_data <= '1' & cmp_wz_num & cmp_wz_offset_one_hot; --l'indirizzo codificato come concatenazione dei sotto campi
-                 o_address <= std_logic_vector(to_unsigned( 9 , 16));
-                 o_we <= '1';
+                 o_address <= std_logic_vector(to_unsigned( 9 , 16));                o_we <= '1';
                  ram_wait_ret_state <= S_DONE;
                  current_state <= S_RAM_WAIT;
 
           --metto done a 1 e aspetto start a 0.
             when S_DONE =>
+            
                 o_en <= '0';  --chiudo scrittura/lettura dalla ram
                 o_we <= '0';
                 o_done <= '1';
