@@ -89,15 +89,16 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
                
                --leggo l'indirizzo da codificare, si trova nella 8va posizione
                o_address <= std_logic_vector(to_unsigned( 8 , 16)); 
-
+                --ed eimino l'8 bit mettendolo a 0 dato che tratto indirizzi da 7 bit
                ram_wait_ret_state <= S_FETCH2;
                current_state <= S_RAM_WAIT;
                
             when S_FETCH2 =>
 
                address <= i_data;  --salvo l'indirizzo letto nel segnale address
-               ram_wait_ret_state <= S_COMPARE; 
-               current_state <= S_RAM_WAIT;
+               --ram_wait_ret_state <= S_COMPARE; 
+               --current_state <= S_RAM_WAIT;
+               current_state <= S_COMPARE;
 
             when S_COMPARE =>
                --cicla le 7 working zone
