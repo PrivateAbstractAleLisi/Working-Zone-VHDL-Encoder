@@ -3,10 +3,10 @@
 -- Designer: Alessandro Lisi
 -- 
 -- Create Date: 26.02.2020 12:22:12
--- Last Edit: 29.04.2020 23:41
--- Design Name: Progetto di Reti Logiche 2020 Workzone Encoder
+-- Last Edit: 07.05.2020 21:31
+-- Design Name: Progetto di Reti Logiche 2020
 -- Module Name: proj_RL_01 - Behavioral
--- Project Name: Workzone Encoder
+-- Project Name: Working Zone Encoder
 
 ----------------------------------------------------------------------------------
 
@@ -180,7 +180,8 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
             when s_send_enc => --ho trovato un match in una delle wz, combino i campi compilati in precedenza per ottenere l'indirizzo codificato
                 
                  o_data <= '1' & cmp_wz_num & cmp_wz_offset_one_hot; --l'indirizzo codificato come concatenazione dei sotto campi
-                 o_address <= std_logic_vector(to_unsigned( 9 , 16));                o_we <= '1';
+                 o_address <= std_logic_vector(to_unsigned( 9 , 16));               
+                  o_we <= '1';
                  ram_wait_ret_state <= S_DONE;
                  current_state <= S_RAM_WAIT;
 
