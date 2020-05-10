@@ -3,7 +3,7 @@
 -- Designer: Alessandro Lisi
 -- 
 -- Create Date: 26.02.2020 12:22:12
--- Last Edit: 07.05.2020 21:31
+-- Last Edit: 10.05.2020 21:41
 -- Design Name: Progetto di Reti Logiche 2020
 -- Module Name: proj_RL_01 - Behavioral
 -- Project Name: Working Zone Encoder
@@ -65,6 +65,12 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
             o_we <= '0';
             counter_3 <= "0000";  --inizializzo contatore WZ
             cmp_wz_found <= '0';   --inizializzo bit wz trovata
+            hp0 <= "00000000";
+            hp1 <= "00000000";
+            hp2 <= "00000000";
+            hp3 <= "00000000";
+            cmp_wz_num <= "000";
+            cmp_wz_offset_one_hot <= "0000";
 
 
        elsif i_clk'event and rising_edge(i_clk) then
@@ -87,6 +93,13 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
                counter_3 <= "0000";  --inizializzo contatore WZ e i vari segnali ausiliari
                cmp_wz_found <= '0';
                
+                hp0 <= "00000000";
+                hp1 <= "00000000";
+                hp2 <= "00000000";
+                hp3 <= "00000000";
+                cmp_wz_num <= "000";
+                cmp_wz_offset_one_hot <= "0000";
+               
                --leggo l'indirizzo da codificare, si trova nella 8va posizione
                o_address <= std_logic_vector(to_unsigned( 8 , 16)); 
                 --ed eimino l'8 bit mettendolo a 0 dato che tratto indirizzi da 7 bit
@@ -96,8 +109,6 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
             when S_FETCH2 =>
 
                address <= i_data;  --salvo l'indirizzo letto nel segnale address
-               --ram_wait_ret_state <= S_COMPARE; 
-               --current_state <= S_RAM_WAIT;
                current_state <= S_COMPARE;
 
             when S_COMPARE =>
@@ -136,7 +147,7 @@ algo: process (i_clk, i_rst) is --singolo processo sensibile al clock e al reset
                   hp2 <= i_data + 2;
                   hp3 <= i_data + 3;
                   current_state <= S_COMPARE2;
-                  --if hp0 xnor 
+
                
             when S_COMPARE2 => --data una wz controlla se c'è un match tra address e i 4 possibili indirizzi hp0,1,2,3
                                   
