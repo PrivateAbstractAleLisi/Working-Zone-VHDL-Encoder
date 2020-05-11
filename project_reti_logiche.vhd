@@ -3,7 +3,7 @@
 -- Designer: Alessandro Lisi
 -- 
 -- Create Date: 26.02.2020 12:22:12
--- Last Edit: 10.05.2020 21:41
+-- Last Edit: 11.05.2020 14:47
 -- Design Name: Progetto di Reti Logiche 2020
 -- Module Name: proj_RL_01 - Behavioral
 -- Project Name: Working Zone Encoder
